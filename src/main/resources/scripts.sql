@@ -1,5 +1,8 @@
+-- Query to create the database
+CREATE DATABASE gym_management;
+
 -- Create user table
-CREATE TABLE users(
+CREATE TABLE IF NOT EXISTS users(
 	user_id SERIAL PRIMARY KEY,
 	username TEXT NOT NULL,
 	password TEXT NOT NULL,
@@ -10,7 +13,7 @@ CREATE TABLE users(
 );
 
 -- Create memberships table
-CREATE TABLE memberships(
+CREATE TABLE IF NOT EXISTS memberships(
 	membership_id SERIAL PRIMARY KEY,
 	membership_type TEXT,
 	description TEXT,
@@ -20,7 +23,7 @@ CREATE TABLE memberships(
 );
 
 -- Create workout class table
-CREATE TABLE workout_classes(
+CREATE TABLE IF NOT EXISTS workout_classes(
 	class_id SERIAL PRIMARY KEY,
 	class_type TEXT,
 	class_description TEXT,

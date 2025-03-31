@@ -1,43 +1,28 @@
-CREATE TABLE users (
-                       user_id SERIAL PRIMARY KEY,
-                       username VARCHAR(50) NOT NULL,
-                       email VARCHAR(100) NOT NULL UNIQUE,
-                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- Create user table
+CREATE TABLE users(
+	user_id SERIAL PRIMARY KEY,
+	username TEXT NOT NULL,
+	password TEXT NOT NULL,
+	email TEXT NOT NULL,
+	phone_number VARCHAR(20),
+	address TEXT,
+	role TEXT check(role IN ('Admin', 'Trainer', 'Member')) NOT NULL
 );
 
-CREATE TABLE cars (
-                      car_id SERIAL PRIMARY KEY,
-                      make VARCHAR(50) NOT NULL,
-                      model VARCHAR(50) NOT NULL,
-                      year INT NOT NULL,
-                      price DECIMAL(10, 2) NOT NULL,
-                      seller_id INT NOT NULL,
-                      FOREIGN KEY (seller_id) REFERENCES users(user_id) ON DELETE CASCADE
+-- Create memberships table
+CREATE TABLE memberships(
+	membership_id SERIAL PRIMARY KEY,
+	membership_type TEXT,
+	description TEXT,
+	cost FLOAT,
+	user_id INT REFERENCES users(user_id),
+	date_purchased DATE
 );
 
-
-
-CREATE TABLE IF NOT EXISTS public.space_fleet_memberships
-(
-    membership_id SERIAL PRIMARY KEY,
-    membership_tier VARCHAR(50) NOT NULL,
-    membership_credits INTEGER NOT NULL,
-    membership_log TEXT,
-    date_registered DATE DEFAULT CURRENT_DATE,
-    astronaut_id INTEGER NOT NULL,
-    CONSTRAINT space_fleet_memberships_astronaut_fkey FOREIGN KEY (astronaut_id)
-    REFERENCES public.astronauts (astronaut_id)
-    ON UPDATE NO ACTION
-    ON DELETE CASCADE
-    );
-
-TABLESPACE pg_default;
-
-
--- Getting sum for sumberships by month example
-SELECT
-    TO_CHAR(date_purchased, 'YYYY-MM') AS month,
-    SUM(membership_price) AS total_revenue
-FROM public.memberships
-GROUP BY month
-ORDER BY month;
+-- Create workout class table
+CREATE TABLE workout_classes(
+	class_id SERIAL PRIMARY KEY,
+	class_type TEXT,
+	class_description TEXT,
+	trainer_id INT REFERENCES users(user_id)
+);

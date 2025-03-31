@@ -1,5 +1,7 @@
 package org.keyin.memberships;
 
+import java.time.LocalDate;
+
 //*\
 // This is class file that represents a membership
 //
@@ -9,6 +11,7 @@ public class Membership {
     private String description;
     private double cost;
     private int memberId;
+    private LocalDate datePurchased;
 
     public Membership() {
     }
@@ -60,6 +63,14 @@ public class Membership {
 
     public void setMemberId(int memberId) {
         this.memberId = memberId;
+    }
+
+    public LocalDate getDatePurchased() {
+        return datePurchased;
+    }
+
+    public void setDatePurchased(LocalDate datePurchased) {
+        this.datePurchased = datePurchased;
     }
 
     // toString method for debugging

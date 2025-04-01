@@ -25,7 +25,7 @@ public class WorkoutClassDAO {
         }
     }
 
-    public void updateWorkoutCLass(WorkoutClass workoutClass) {
+    public void updateWorkoutClass(WorkoutClass workoutClass) {
         String sql = "UPDATE workoutclasses SET workoutclasstype =?, workoutclassdescription =?, trainerid =? WHERE workoutclassid =?";
 
         try (Connection conn = DatabaseConnection.getConnection();

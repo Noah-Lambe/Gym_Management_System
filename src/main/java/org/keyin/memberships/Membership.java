@@ -16,12 +16,14 @@ public class Membership {
     public Membership() {
     }
 
-    public Membership(int membershipId, String membershipType, String description, double cost, int memberId) {
+    public Membership(int membershipId, String membershipType, String description, double cost, int memberId,
+            LocalDate datePurchased) {
         this.membershipId = membershipId;
         this.membershipType = membershipType;
         this.description = description;
         this.cost = cost;
         this.memberId = memberId;
+        this.datePurchased = LocalDate.now();
     }
 
     // Getters and setters

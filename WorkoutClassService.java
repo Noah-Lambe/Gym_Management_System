@@ -21,7 +21,7 @@ public class WorkoutClassService {
         workoutClass.setTrainerId(trainerId);
 
         workoutDAO.addWorkoutClass(workoutClass);
-        System.out.println("✅ Workout class added successfully.");
+        System.out.println("Workout class added successfully.");
     }
 
     public void updateWorkoutClass(Scanner scanner, int trainerId) {
@@ -41,7 +41,7 @@ public class WorkoutClassService {
         workoutClass.setTrainerId(trainerId);
 
         workoutDAO.updateWorkoutClass(workoutClass);
-        System.out.println("✅ Workout class updated.");
+        System.out.println("Workout class updated.");
     }
 
     public void deleteWorkoutClass(Scanner scanner, int trainerId) {
@@ -49,7 +49,7 @@ public class WorkoutClassService {
         int id = Integer.parseInt(scanner.nextLine());
 
         workoutDAO.deleteWorkoutClass(id);
-        System.out.println("🗑️ Workout class deleted.");
+        System.out.println("Workout class deleted.");
     }
 
     public void viewWorkoutClassesByTrainer(int trainerId) {

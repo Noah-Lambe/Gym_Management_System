@@ -39,7 +39,7 @@ public class MembershipService {
         membership.setDatePurchased(LocalDate.now());
 
         dao.addMembership(membership);
-        System.out.println("✅ Membership purchased successfully!");
+        System.out.println("Membership purchased successfully!");
     }
 
     public void viewMembershipExpenses(int userId) {

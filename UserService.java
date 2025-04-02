@@ -9,13 +9,10 @@ public class UserService {
     public void viewAllUsers() {
         System.out.println("\n=== View Users ===");
         System.out.println("(Database user listing not implemented yet)");
-        // Optional: Later we can add a `getAllUsers()` in UserDao to fetch and list all
-        // users.
     }
 
     public void deleteUser(String username) {
         System.out.println("User deletion from database not yet implemented.");
-        // You can add delete logic in UserDao if needed.
     }
 
     public void addUser(User user) {
@@ -24,7 +21,7 @@ public class UserService {
             var conn = org.keyin.database.DatabaseConnection.getConnection();
             var pstmt = conn.prepareStatement(insertSql);
             pstmt.setString(1, user.getUserName());
-            pstmt.setString(2, user.getPassword()); // Later you can hash this!
+            pstmt.setString(2, user.getPassword()); 
             pstmt.setString(3, user.getUserRole());
             pstmt.executeUpdate();
 

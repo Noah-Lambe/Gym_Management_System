@@ -1,40 +1,45 @@
 package org.keyin.user;
 
-import org.mindrot.jbcrypt.BCrypt;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class UserService {
-  private UserDao userDao;
+    private UserDao userDao = new UserDao();
 
-  public UserService() {
-    this.userDao = new UserDao();
-  }
-
-  // Register a new user (with password hashing)
-  public void registerUser(String username, String password, String email, String phoneNumber, String address, String role) throws SQLException {
-    String hashedPassword = hashPassword(password);
-    User user = new User(0, username, hashedPassword, email, phoneNumber, address, role);
-    userDao.registerUser(user);
-    System.out.println("User registered successfully!");
-  }
-
-  // Authenticate user login (check password)
-  public User authenticateUser(String username, String password) throws SQLException {
-    User user = userDao.getUserByUsername(username);
-    if (user != null && checkPassword(password, user.getPassword())) {
-      return user;
+    public void viewAllUsers() {
+        System.out.println("\n=== View Users ===");
+        System.out.println("(Database user listing not implemented yet)");
     }
-    return null;
-  }
 
-  // Hash password using BCrypt
-  private String hashPassword(String password) {
-    return BCrypt.hashpw(password, BCrypt.gensalt(12));
-  }
+    public void deleteUser(String username) {
+        System.out.println("User deletion from database not yet implemented.");
+    }
 
-  // Check password using BCrypt
-  private boolean checkPassword(String password, String hashedPassword) {
-    return BCrypt.checkpw(password, hashedPassword);
-  }
+    public void addUser(User user) {
+        try {
+            String insertSql = "INSERT INTO users (user_name, user_password, user_role) VALUES (?, ?, ?)";
+            var conn = org.keyin.database.DatabaseConnection.getConnection();
+            var pstmt = conn.prepareStatement(insertSql);
+            pstmt.setString(1, user.getUserName());
+            pstmt.setString(2, user.getPassword()); 
+            pstmt.setString(3, user.getUserRole());
+            pstmt.executeUpdate();
+
+            System.out.println("User successfully added to the database.");
+        } catch (SQLException e) {
+            System.out.println("Error adding user to the database: " + e.getMessage());
+        }
+    }
+
+    public User loginForUser(String username, String password) {
+        try {
+            User user = userDao.getUserByUsername(username);
+            if (user != null && user.getPassword().equals(password)) {
+                return user;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error during login: " + e.getMessage());
+        }
+        return null;
+    }
 }
-

@@ -2,28 +2,101 @@ package org.keyin.memberships;
 
 import org.keyin.database.DatabaseConnection;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-// DAOs are responsible for handling the interactions with the database
 public class MembershipDAO {
 
-    // Here we have a method that adds a membership to the database,
-    // it takes a membership object as a parameter and inserts it into the database
-    // using a prepared statement
-    // THIS IS JUST AN EXAMPLE FOR  YOU TO LOOK AT
+    public void addMembership(Membership membership) {
+        String sql = "INSERT INTO memberships (membershiptype, membershipdescription, membershipcost, memberid, date_purchased) VALUES (?, ?, ?, ?, ?)";
 
-//    public void addMemberShip() throws SQLException {
-//        String sql = "INSERT INTO memberships (membershiptype, membership_price, membership_description, date_purchased, user_id) VALUES (?, ?, ?, ?, ?)";
-//        try (Connection conn = DatabaseConnection.getConnection();
-//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-//            pstmt.setString(1, membership.getMembershipType());
-//            pstmt.setInt(2, membership.getMembership_price())
-//            pstmt.setDate(4, Date.valueOf(membership.getDatePurchased()));
-//            pstmt.setInt(5,membership.getUser_id());
-//            pstmt.executeUpdate();
-//        }
-//    }
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, membership.getMembershipType());
+            pstmt.setString(2, membership.getDescription());
+            pstmt.setDouble(3, membership.getCost());
+            pstmt.setInt(4, membership.getMemberId());
+            pstmt.setDate(5, Date.valueOf(membership.getDatePurchased()));
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Membership> getAllMemberships() {
+        List<Membership> memberships = new ArrayList<>();
+        String sql = "SELECT * FROM memberships";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Membership m = new Membership(
+                        rs.getInt("membershipid"),
+                        rs.getString("membershiptype"),
+                        rs.getString("membershipdescription"),
+                        rs.getDouble("membershipcost"),
+                        rs.getInt("memberid"),
+                        rs.getDate("date_purchased").toLocalDate());
+                memberships.add(m);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return memberships;
+    }
+
+    public double getTotalRevenue() {
+        double total = 0;
+        String sql = "SELECT SUM(membershipcost) FROM memberships";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+
+            if (rs.next()) {
+                total = rs.getDouble(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return total;
+    }
+
+    public List<Membership> getMembershipsByMemberId(int memberId) {
+        List<Membership> memberships = new ArrayList<>();
+        String sql = "SELECT * FROM memberships WHERE memberid = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, memberId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                memberships.add(new Membership(
+                        rs.getInt("membershipid"),
+                        rs.getString("membershiptype"),
+                        rs.getString("membershipdescription"),
+                        rs.getDouble("membershipcost"),
+                        rs.getInt("memberid"),
+                        rs.getDate("date_purchased").toLocalDate()));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return memberships;
+    }
 }

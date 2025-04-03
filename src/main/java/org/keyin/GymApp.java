@@ -1,8 +1,10 @@
 package org.keyin;
 
+import org.keyin.memberships.Membership;
 import org.keyin.memberships.MembershipService;
 import org.keyin.user.User;
 import org.keyin.user.UserService;
+import org.keyin.workoutclasses.WorkoutClass;
 import org.keyin.workoutclasses.WorkoutClassService;
 
 import java.sql.SQLException;
@@ -62,8 +64,8 @@ public class GymApp {
 
         User user = userService.loginForUser(username, password);
         if (user != null) {
-            System.out.println("Login Successful! Welcome " + user.getUserName());
-            switch (user.getUserRole().toLowerCase()) {
+            System.out.println("Login Successful! Welcome " + user.getUsername());
+            switch (user.getRole().toLowerCase()) {
                 case "admin":
                     showAdminMenu(scanner, user, userService, membershipService, workoutService);
                     break;
@@ -89,8 +91,9 @@ public class GymApp {
             System.out.println("\n--- Admin Menu ---");
             System.out.println("1. View all users");
             System.out.println("2. Delete a user");
-            System.out.println("3. View all memberships & total revenue");
-            System.out.println("4. Logout");
+            System.out.println("3. View all memberships");
+            System.out.println("4. View all total revenue");
+            System.out.println("5. Logout");
             System.out.print("Enter your choice: ");
 
             while (!scanner.hasNextInt()) {
@@ -99,21 +102,23 @@ public class GymApp {
             }
 
             choice = scanner.nextInt();
-            scanner.nextLine(); 
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
-                    userService.viewAllUsers(); 
+                    userService.viewAllUsers();
                     break;
                 case 2:
                     System.out.print("Enter the username to delete: ");
                     String usernameToDelete = scanner.nextLine();
-                    userService.deleteUser(usernameToDelete); 
+                    userService.deleteUser(usernameToDelete);
                     break;
                 case 3:
-                    membershipService.viewAllMembershipsAndRevenue(); 
+                    membershipService.getAllMemberships().forEach(System.out::println);
                     break;
                 case 4:
+                    System.out.printf("Total Revenue: %.2f%n", membershipService.getTotalRevenue());
+                case 5:
                     System.out.println("Logging out...");
                     break;
                 default:
@@ -144,16 +149,38 @@ public class GymApp {
 
             switch (choice) {
                 case 1:
-                    workoutService.addWorkoutClass(scanner, user.getUserId());
+                    WorkoutClass newClass = new WorkoutClass();
+                    System.out.print("Enter workout type: ");
+                    newClass.setWorkoutClassType(scanner.nextLine());
+
+                    workoutService.addWorkoutClass(newClass);
                     break;
+
                 case 2:
-                    workoutService.updateWorkoutClass(scanner, user.getUserId());
+                    WorkoutClass updatedClass = new WorkoutClass();
+
+                    System.out.print("Enter the ID of the workout class to update: ");
+                    int classId = scanner.nextInt();
+                    scanner.nextLine();
+
+                    updatedClass.setWorkoutClassId(classId);
+
+                    System.out.print("Enter new workout type: ");
+                    updatedClass.setWorkoutClassType(scanner.nextLine());
+
+                    workoutService.updateWorkoutClass(updatedClass);
                     break;
+
                 case 3:
-                    workoutService.deleteWorkoutClass(scanner, user.getUserId());
+                    System.out.print("Enter the workout class ID to delete: ");
+                    int classIdToDelete = scanner.nextInt();
+                    scanner.nextLine(); // clear newline
+
+                    workoutService.deleteWorkoutClass(classIdToDelete);
+
                     break;
                 case 4:
-                    workoutService.viewWorkoutClassesByTrainer(user.getUserId());
+                    workoutService.getWorkoutClassesByTrainer(user.getId());
                     break;
                 case 5:
                     System.out.println("Logging out...");
@@ -186,13 +213,20 @@ public class GymApp {
 
             switch (choice) {
                 case 1:
-                    workoutService.viewAllWorkoutClasses();
+                    workoutService.getAllWorkoutClasses();
                     break;
                 case 2:
-                    membershipService.viewMembershipExpenses(user.getUserId());
+                    membershipService.viewMembershipExpenses(user.getId());
                     break;
                 case 3:
-                    membershipService.purchaseMembership(scanner, user.getUserId());
+                    Membership newMembership = new Membership();
+                    System.out.print("Enter membership cost: ");
+                    double cost = scanner.nextDouble();
+                    scanner.nextLine();
+                    newMembership.setCost(cost);
+
+                    membershipService.purchaseMembership(newMembership);
+
                     break;
                 case 4:
                     System.out.println("Logging out...");
@@ -204,14 +238,22 @@ public class GymApp {
     }
 
     private static void addNewUser(Scanner scanner, UserService userService) {
+        System.out.print("Enter user ID: ");
+        int id = scanner.nextInt();
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
+        System.out.print("Enter email: ");
+        String email = scanner.nextLine();
+        System.out.print("Enter phone number: ");
+        String phoneNumber = scanner.nextLine();
+        System.out.print("Enter address: ");
+        String address = scanner.nextLine();
         System.out.print("Enter role (Admin/Trainer/Member): ");
         String role = scanner.nextLine();
 
-        User user = new User(username, password, role);
+        User user = new User(id, username, password, email, phoneNumber, address, role);
         userService.addUser(user);
         System.out.println("User added successfully!");
     }

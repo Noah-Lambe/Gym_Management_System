@@ -85,7 +85,7 @@ public class User {
   // Method to display user info
   @Override
   public String toString() {
-    return "User{" + "id=" + id + ", username='" + username + '\'' + ", email='" + email + '\'' + ", phoneNumber='" + phoneNumber + '\'' + ", address='" + address + '\'' + ", role='" + role + '\'' + '}';
+    return "User{" + "id=" + id + ", username='" + username + '\'' + ", email='" + email + '\'' + ", phoneNumber='"
+        + phoneNumber + '\'' + ", address='" + address + '\'' + ", role='" + role + '\'' + '}';
   }
 }
-

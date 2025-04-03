@@ -4,12 +4,12 @@ CREATE DATABASE gym_management;
 -- Create user table
 CREATE TABLE IF NOT EXISTS users(
 	user_id SERIAL PRIMARY KEY,
-	username TEXT NOT NULL,
-	password TEXT NOT NULL,
-	email TEXT NOT NULL,
-	phone_number VARCHAR(20),
-	address TEXT,
-	role TEXT check(role IN ('Admin', 'Trainer', 'Member')) NOT NULL
+	user_name TEXT NOT NULL,
+	user_password TEXT NOT NULL,
+	user_email TEXT NOT NULL,
+	user_phone VARCHAR(20),
+	user_address TEXT,
+	user_role TEXT check(role IN ('Admin', 'Trainer', 'Member')) NOT NULL
 );
 
 -- Create memberships table

@@ -99,19 +99,19 @@ public class GymApp {
             }
 
             choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine(); 
 
             switch (choice) {
                 case 1:
-                    userService.viewAllUsers(); // You’ll create this in UserService
+                    userService.viewAllUsers(); 
                     break;
                 case 2:
                     System.out.print("Enter the username to delete: ");
                     String usernameToDelete = scanner.nextLine();
-                    userService.deleteUser(usernameToDelete); // You’ll create this too
+                    userService.deleteUser(usernameToDelete); 
                     break;
                 case 3:
-                    membershipService.viewAllMembershipsAndRevenue(); // You’ll also create this
+                    membershipService.viewAllMembershipsAndRevenue(); 
                     break;
                 case 4:
                     System.out.println("Logging out...");
@@ -144,7 +144,7 @@ public class GymApp {
 
             switch (choice) {
                 case 1:
-                    workoutService.addWorkoutClass(scanner, user.getUserId()); // Pass trainer ID
+                    workoutService.addWorkoutClass(scanner, user.getUserId());
                     break;
                 case 2:
                     workoutService.updateWorkoutClass(scanner, user.getUserId());

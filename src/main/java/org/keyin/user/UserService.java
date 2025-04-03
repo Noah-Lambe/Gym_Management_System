@@ -17,12 +17,16 @@ public class UserService {
 
     public void addUser(User user) {
         try {
-            String insertSql = "INSERT INTO users (user_name, user_password, user_role) VALUES (?, ?, ?)";
+            String insertSql = "INSERT INTO users (user_name, user_password, user_email, user_phone, user_address, user_role) VALUES (?, ?, ?, ?, ?, ?)";
             var conn = org.keyin.database.DatabaseConnection.getConnection();
             var pstmt = conn.prepareStatement(insertSql);
-            pstmt.setString(1, user.getUserName());
-            pstmt.setString(2, user.getPassword()); 
-            pstmt.setString(3, user.getUserRole());
+            pstmt.setString(1, user.getUsername());
+            pstmt.setString(2, user.getPassword());
+            pstmt.setString(3, user.getEmail());
+            pstmt.setString(4, user.getPhoneNumber());
+            pstmt.setString(5, user.getAddress());
+            pstmt.setString(6, user.getRole());
+
             pstmt.executeUpdate();
 
             System.out.println("User successfully added to the database.");

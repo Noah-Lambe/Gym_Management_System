@@ -17,7 +17,7 @@ public class MembershipService {
             System.out.println(m);
         }
 
-        System.out.println("\n💰 Total Revenue: $" + totalRevenue);
+        System.out.println("\n Total Revenue: $" + totalRevenue);
     }
 
     public void purchaseMembership(Scanner scanner, int userId) {
@@ -52,6 +52,6 @@ public class MembershipService {
             total += m.getCost();
         }
 
-        System.out.println("💸 Total Spent: $" + total);
+        System.out.println(" Total Spent: $" + total);
     }
 }

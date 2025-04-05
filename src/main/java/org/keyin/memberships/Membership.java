@@ -11,19 +11,19 @@ public class Membership {
     private String description;
     private double cost;
     private int memberId;
-    private LocalDate datePurchased;
+    // private LocalDate datePurchased;
 
-    public Membership() {}
+    public Membership() {
+    }
 
-    public Membership(int membershipId, String membershipType, String description, double cost, int memberId,
-            LocalDate datePurchased) {
-  
+    public Membership(int membershipId, String membershipType, String description, double cost, int memberId) {
+
         this.membershipId = membershipId;
         this.membershipType = membershipType;
         this.description = description;
         this.cost = cost;
         this.memberId = memberId;
-        this.datePurchased = LocalDate.now();
+        // this.datePurchased = LocalDate.now();
 
     }
 
@@ -68,13 +68,13 @@ public class Membership {
         this.memberId = memberId;
     }
 
-    public LocalDate getDatePurchased() {
-        return datePurchased;
-    }
+    // public LocalDate getDatePurchased() {
+    // return datePurchased;
+    // }
 
-    public void setDatePurchased(LocalDate datePurchased) {
-        this.datePurchased = datePurchased;
-    }
+    // public void setDatePurchased(LocalDate datePurchased) {
+    // this.datePurchased = datePurchased;
+    // }
 
     // toString method for debugging
     @Override

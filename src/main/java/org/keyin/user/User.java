@@ -14,8 +14,7 @@ public class User {
   private String role;
 
   // Constructor
-  public User(int id, String username, String password, String email, String phoneNumber, String address, String role) {
-    this.id = id;
+  public User(String username, String password, String email, String phoneNumber, String address, String role) {
     this.username = username;
     this.password = password;
     this.email = email;
@@ -85,7 +84,7 @@ public class User {
   // Method to display user info
   @Override
   public String toString() {
-    return "User{" + "id=" + id + ", username='" + username + '\'' + ", email='" + email + '\'' + ", phoneNumber='"
+    return "User{'username=" + username + '\'' + ", email='" + email + '\'' + ", phoneNumber='"
         + phoneNumber + '\'' + ", address='" + address + '\'' + ", role='" + role + '\'' + '}';
   }
 }

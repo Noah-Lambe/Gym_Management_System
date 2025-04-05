@@ -1,5 +1,5 @@
 -- Query to create the database
-CREATE DATABASE gym_management;
+-- CREATE DATABASE gym_management;
 
 -- Create user table
 CREATE TABLE IF NOT EXISTS users(
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users(
 	user_email TEXT NOT NULL,
 	user_phone VARCHAR(20),
 	user_address TEXT,
-	user_role TEXT check(role IN ('Admin', 'Trainer', 'Member')) NOT NULL
+	user_role TEXT check(user_role IN ('Admin', 'Trainer', 'Member')) NOT NULL
 );
 
 -- Create memberships table
@@ -19,7 +19,6 @@ CREATE TABLE IF NOT EXISTS memberships(
 	description TEXT,
 	cost FLOAT,
 	user_id INT REFERENCES users(user_id),
-	date_purchased DATE
 );
 
 -- Create workout class table

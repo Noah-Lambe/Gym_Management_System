@@ -10,7 +10,7 @@ import java.util.List;
 public class MembershipDAO {
 
     public void addMembership(Membership membership) {
-        String sql = "INSERT INTO memberships (membershiptype, membershipdescription, membershipcost, memberid, date_purchased) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO memberships (membershiptype, membershipdescription, membershipcost, memberid) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -19,7 +19,6 @@ public class MembershipDAO {
             pstmt.setString(2, membership.getDescription());
             pstmt.setDouble(3, membership.getCost());
             pstmt.setInt(4, membership.getMemberId());
-            pstmt.setDate(5, Date.valueOf(membership.getDatePurchased()));
 
             pstmt.executeUpdate();
 
@@ -42,8 +41,7 @@ public class MembershipDAO {
                         rs.getString("membershiptype"),
                         rs.getString("membershipdescription"),
                         rs.getDouble("membershipcost"),
-                        rs.getInt("memberid"),
-                        rs.getDate("date_purchased").toLocalDate());
+                        rs.getInt("memberid"));
                 memberships.add(m);
             }
 
@@ -89,8 +87,7 @@ public class MembershipDAO {
                         rs.getString("membershiptype"),
                         rs.getString("membershipdescription"),
                         rs.getDouble("membershipcost"),
-                        rs.getInt("memberid"),
-                        rs.getDate("date_purchased").toLocalDate()));
+                        rs.getInt("memberid")));
             }
 
         } catch (SQLException e) {

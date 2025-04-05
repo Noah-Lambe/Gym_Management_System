@@ -1,5 +1,6 @@
 package org.keyin;
 
+import org.keyin.database.DatabaseConnection;
 import org.keyin.memberships.Membership;
 import org.keyin.memberships.MembershipService;
 import org.keyin.user.User;
@@ -16,6 +17,8 @@ public class GymApp {
         UserService userService = new UserService();
         MembershipService membershipService = new MembershipService();
         WorkoutClassService workoutService = new WorkoutClassService();
+
+        DatabaseConnection.initializeDatabase("src/main/resources/scripts.sql");
 
         // Scanner for user input
         Scanner scanner = new Scanner(System.in);
@@ -238,8 +241,6 @@ public class GymApp {
     }
 
     private static void addNewUser(Scanner scanner, UserService userService) {
-        System.out.print("Enter user ID: ");
-        int id = scanner.nextInt();
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
         System.out.print("Enter password: ");
@@ -253,9 +254,8 @@ public class GymApp {
         System.out.print("Enter role (Admin/Trainer/Member): ");
         String role = scanner.nextLine();
 
-        User user = new User(id, username, password, email, phoneNumber, address, role);
+        User user = new User(username, password, email, phoneNumber, address, role);
         userService.addUser(user);
-        System.out.println("User added successfully!");
+        // System.out.println("User added successfully!");
     }
-
 }

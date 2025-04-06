@@ -10,7 +10,7 @@ import java.util.List;
 public class MembershipDAO {
 
     public void addMembership(Membership membership) {
-        String sql = "INSERT INTO memberships (membershiptype, membershipdescription, membershipcost, memberid) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO memberships (membership_type, description, cost, member_id) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {

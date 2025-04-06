@@ -42,8 +42,10 @@ public class UserDao {
     }
 
     // Register a new user
-    public void registerUser(User user) throws SQLException {
+    public int registerUser(User user) throws SQLException {
         String sql = "INSERT INTO users (user_name, user_password, email, phone_number, address, user_role) VALUES (?, ?, ?, ?, ?, ?)";
+        int userId = -1;
+
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getUsername());
@@ -53,6 +55,14 @@ public class UserDao {
             pstmt.setString(5, user.getAddress());
             pstmt.setString(6, user.getRole());
             pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                userId = rs.getInt("user_id");
+                System.out.println("New user registered with user_id = " + userId);
+            }
         }
+        return userId;
     }
 }

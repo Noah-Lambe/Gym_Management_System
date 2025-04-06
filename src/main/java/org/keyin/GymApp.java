@@ -227,6 +227,7 @@ public class GymApp {
                     double cost = scanner.nextDouble();
                     scanner.nextLine();
                     newMembership.setCost(cost);
+                    newMembership.setMemberId(user.getId());
 
                     membershipService.purchaseMembership(newMembership);
 

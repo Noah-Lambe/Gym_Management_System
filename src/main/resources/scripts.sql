@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS memberships(
 	membership_type TEXT,
 	description TEXT,
 	cost FLOAT,
-	user_id INT REFERENCES users(user_id),
+	member_id INT REFERENCES users(user_id)
 );
 
 -- Create workout class table

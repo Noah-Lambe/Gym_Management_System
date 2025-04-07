@@ -30,15 +30,21 @@ public class MembershipService {
         return membershipDAO.getMembershipsByMemberId(memberId);
     }
 
-    public double viewMembershipExpenses(int memberId) {
+    public void viewMembershipExpenses(int memberId) {
         List<Membership> memberships = membershipDAO.getMembershipsByMemberId(memberId);
+
+        if (memberships.isEmpty()) {
+            System.out.println("You have no membership purchases.");
+            return;
+        }
 
         double totalCost = 0;
         for (Membership membership : memberships) {
+            System.out.println(membership); // or print specific fields
             totalCost += membership.getCost();
         }
 
-        return totalCost;
+        System.out.printf("Total spent on memberships: $%.2f\n", totalCost);
     }
 
     // When you inject in the DAO you have access to all methods in it

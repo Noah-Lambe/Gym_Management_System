@@ -167,6 +167,9 @@ public class GymApp {
                     System.out.print("Enter workout type: ");
                     newClass.setWorkoutClassType(scanner.nextLine());
 
+                    System.out.print("Enter class description: ");
+                    newClass.setWorkoutClassDescription(scanner.nextLine());
+
                     newClass.setTrainerId(user.getId());
 
                     workoutService.addWorkoutClass(newClass);
@@ -183,6 +186,9 @@ public class GymApp {
 
                     System.out.print("Enter new workout type: ");
                     updatedClass.setWorkoutClassType(scanner.nextLine());
+
+                    System.out.print("Enter class description: ");
+                    updatedClass.setWorkoutClassDescription(scanner.nextLine());
 
                     updatedClass.setTrainerId(user.getId());
 
@@ -204,8 +210,10 @@ public class GymApp {
                     } else {
                         System.out.println("\nYour Workout Classes:");
                         for (WorkoutClass wc : trainerClasses) {
-                            System.out
-                                    .println("ID: " + wc.getWorkoutClassId() + " | Type: " + wc.getWorkoutClassType());
+                            System.out.println("ID: " + wc.getWorkoutClassId() +
+                                    " | Type: " + wc.getWorkoutClassType() +
+                                    " | Description: " + wc.getWorkoutClassDescription());
+
                         }
                     }
                     break;

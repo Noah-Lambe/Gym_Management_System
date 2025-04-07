@@ -9,13 +9,14 @@ import java.util.List;
 
 public class WorkoutClassDAO {
     public void addWorkoutClass(WorkoutClass workoutClass) {
-        String sql = "INSERT INTO workout_classes (class_type, trainer_id) VALUES (?, ?)";
+        String sql = "INSERT INTO workout_classes (class_type, class_description, trainer_id) VALUES (?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setString(1, workoutClass.getWorkoutClassType());
-            pstmt.setInt(2, workoutClass.getTrainerId());
+            pstmt.setString(2, workoutClass.getWorkoutClassDescription()); // ✅ Add this
+            pstmt.setInt(3, workoutClass.getTrainerId());
 
             pstmt.executeUpdate();
 

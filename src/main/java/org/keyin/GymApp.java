@@ -109,13 +109,23 @@ public class GymApp {
 
             switch (choice) {
                 case 1:
-                    userService.viewAllUsers();
+                    try {
+                        userService.viewAllUsers();
+                    } catch (SQLException e) {
+                        System.out.println("Error viewing all users: " + e.getMessage());
+                    }
                     break;
                 case 2:
                     System.out.print("Enter the username to delete: ");
                     String usernameToDelete = scanner.nextLine();
-                    userService.deleteUser(usernameToDelete);
+                    try {
+                        userService.deleteUser(usernameToDelete);
+                        System.out.println("User deleted successfully.");
+                    } catch (SQLException e) {
+                        System.out.println("Error deleting user: " + e.getMessage());
+                    }
                     break;
+
                 case 3:
                     membershipService.getAllMemberships().forEach(System.out::println);
                     break;
@@ -228,6 +238,9 @@ public class GymApp {
                     scanner.nextLine();
                     newMembership.setCost(cost);
                     newMembership.setMemberId(user.getId());
+
+                    System.out.println("DEBUG: User ID from logged-in user: " + user.getId());
+                    System.out.println("DEBUG: Member ID set on newMembership: " + newMembership.getMemberId());
 
                     membershipService.purchaseMembership(newMembership);
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class WorkoutClassDAO {
     public void addWorkoutClass(WorkoutClass workoutClass) {
-        String sql = "INSERT INTO workoutClasses (workoutclasstype, workoutclassdescription, trainerid) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO workout_classes (class_type, class_description, trainer_id) VALUES (?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -26,7 +26,7 @@ public class WorkoutClassDAO {
     }
 
     public void updateWorkoutClass(WorkoutClass workoutClass) {
-        String sql = "UPDATE workoutclasses SET workoutclasstype =?, workoutclassdescription =?, trainerid =? WHERE workoutclassid =?";
+        String sql = "UPDATE workout_classes SET class_type =?, class_description =?, trainer_id =? WHERE class_id =?";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -44,7 +44,7 @@ public class WorkoutClassDAO {
     }
 
     public void deleteWorkoutClass(int workoutClassId) {
-        String sql = "DELETE FROM workoutclasses WHERE workoutclassid =?";
+        String sql = "DELETE FROM workout_classes WHERE class_id =?";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -59,7 +59,7 @@ public class WorkoutClassDAO {
 
     public List<WorkoutClass> getAllClasses() {
         List<WorkoutClass> workoutClasses = new ArrayList<>();
-        String sql = "SELECT * FROM workoutclasses";
+        String sql = "SELECT * FROM workout_classes";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 Statement stmt = conn.createStatement();
@@ -67,10 +67,10 @@ public class WorkoutClassDAO {
 
             while (rs.next()) {
                 WorkoutClass workoutClass = new WorkoutClass(
-                        rs.getInt("workoutclassid"),
-                        rs.getString("workoutclasstype"),
-                        rs.getString("workoutclassdescription"),
-                        rs.getInt("trainerid"));
+                        rs.getInt("class_id"),
+                        rs.getString("class_type"),
+                        rs.getString("class_description"),
+                        rs.getInt("trainer_id"));
                 workoutClasses.add(workoutClass);
             }
 
@@ -83,7 +83,7 @@ public class WorkoutClassDAO {
 
     public List<WorkoutClass> getWorkoutClassesByTrainer(int workoutClassId) {
         List<WorkoutClass> workoutClasses = new ArrayList<>();
-        String sql = "SELECT * FROM workoutclasses WHERE trainerid =?";
+        String sql = "SELECT * FROM workout_classes WHERE trainer_id =?";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -93,10 +93,10 @@ public class WorkoutClassDAO {
 
             while (rs.next()) {
                 WorkoutClass workoutClass = new WorkoutClass(
-                        rs.getInt("workoutclassid"),
-                        rs.getString("workoutclasstype"),
-                        rs.getString("workoutclassdescription"),
-                        rs.getInt("trainerid"));
+                        rs.getInt("class_id"),
+                        rs.getString("class_type"),
+                        rs.getString("class_description"),
+                        rs.getInt("trainer_id"));
                 workoutClasses.add(workoutClass);
             }
 

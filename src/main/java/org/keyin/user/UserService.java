@@ -1,37 +1,58 @@
 package org.keyin.user;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
+
+import org.keyin.database.DatabaseConnection;
 
 public class UserService {
     private UserDao userDao = new UserDao();
 
-    public void viewAllUsers() {
-        System.out.println("\n=== View Users ===");
-        System.out.println("(Database user listing not implemented yet)");
+    public void viewAllUsers() throws SQLException {
+        List<User> users = userDao.getAllUsers();
+
+        if (users.isEmpty()) {
+            System.out.println("No users found.");
+        } else {
+            System.out.println("\n=== Registered Users ===");
+            for (User user : users) {
+                System.out.println("ID: " + user.getId());
+                System.out.println("Username: " + user.getUsername());
+                System.out.println("Email: " + user.getEmail());
+                System.out.println("Phone: " + user.getPhoneNumber());
+                System.out.println("Address: " + user.getAddress());
+                System.out.println("Role: " + user.getRole());
+                System.out.println("-----------------------------");
+            }
+        }
     }
 
-    public void deleteUser(String username) {
-        System.out.println("User deletion from database not yet implemented.");
+    public void deleteUser(String username) throws SQLException {
+        String sql = "DELETE FROM users WHERE user_name = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, username);
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("User '" + username + "' deleted successfully.");
+            } else {
+                System.out.println("No user found with username: " + username);
+            }
+        }
     }
 
-    public void addUser(User user) {
+    public int addUser(User user) {
         try {
-            String insertSql = "INSERT INTO users (user_name, user_password, user_email, user_phone, user_address, user_role) VALUES (?, ?, ?, ?, ?, ?)";
-            var conn = org.keyin.database.DatabaseConnection.getConnection();
-            var pstmt = conn.prepareStatement(insertSql);
-            pstmt.setString(1, user.getUsername());
-            pstmt.setString(2, user.getPassword());
-            pstmt.setString(3, user.getEmail());
-            pstmt.setString(4, user.getPhoneNumber());
-            pstmt.setString(5, user.getAddress());
-            pstmt.setString(6, user.getRole());
-
-            pstmt.executeUpdate();
-
-            System.out.println("User successfully added to the database.");
+            int userId = userDao.registerUser(user);
+            System.out.println("User successfully added to the database with ID: " + userId);
+            return userId;
         } catch (SQLException e) {
             System.out.println("Error adding user to the database: " + e.getMessage());
+            return -1;
         }
     }
 

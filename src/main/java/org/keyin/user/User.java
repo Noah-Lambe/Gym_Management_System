@@ -1,7 +1,7 @@
 package org.keyin.user;
 
 //*
-// This is the parent class for all users, There are 3 types of users: Trainer, Member, and Admin
+// This is the parent class for all users: Trainer, Member, and Admin
 //
 // *//
 public class User {
@@ -13,8 +13,19 @@ public class User {
   private String address;
   private String role;
 
-  // Constructor
+  // Constructor without ID (for new users)
   public User(String username, String password, String email, String phoneNumber, String address, String role) {
+    this.username = username;
+    this.password = password;
+    this.email = email;
+    this.phoneNumber = phoneNumber;
+    this.address = address;
+    this.role = role;
+  }
+
+  // Constructor with ID (for users from the database)
+  public User(int id, String username, String password, String email, String phoneNumber, String address, String role) {
+    this.id = id;
     this.username = username;
     this.password = password;
     this.email = email;
@@ -67,24 +78,5 @@ public class User {
 
   public void setEmail(String email) {
     this.email = email;
-  }
-
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
-
-  public void setAddress(String address) {
-    this.address = address;
-  }
-
-  public void setRole(String role) {
-    this.role = role;
-  }
-
-  // Method to display user info
-  @Override
-  public String toString() {
-    return "User{'username=" + username + '\'' + ", email='" + email + '\'' + ", phoneNumber='"
-        + phoneNumber + '\'' + ", address='" + address + '\'' + ", role='" + role + '\'' + '}';
   }
 }

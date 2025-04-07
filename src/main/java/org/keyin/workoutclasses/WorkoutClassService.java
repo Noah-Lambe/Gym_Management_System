@@ -12,7 +12,7 @@ public class WorkoutClassService {
             throw new IllegalArgumentException("Workout type is required.");
         }
         workoutDAO.addWorkoutClass(workoutClass);
-        System.out.println("Workout class added successfully.");
+        System.out.println("Workout class added successfully with ID: " + workoutClass.getWorkoutClassId());
     }
 
     public void updateWorkoutClass(WorkoutClass workoutClass) {

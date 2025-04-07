@@ -9,6 +9,7 @@ import org.keyin.workoutclasses.WorkoutClass;
 import org.keyin.workoutclasses.WorkoutClassService;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class GymApp {
@@ -166,6 +167,8 @@ public class GymApp {
                     System.out.print("Enter workout type: ");
                     newClass.setWorkoutClassType(scanner.nextLine());
 
+                    newClass.setTrainerId(user.getId());
+
                     workoutService.addWorkoutClass(newClass);
                     break;
 
@@ -181,23 +184,36 @@ public class GymApp {
                     System.out.print("Enter new workout type: ");
                     updatedClass.setWorkoutClassType(scanner.nextLine());
 
+                    updatedClass.setTrainerId(user.getId());
+
                     workoutService.updateWorkoutClass(updatedClass);
                     break;
 
                 case 3:
                     System.out.print("Enter the workout class ID to delete: ");
                     int classIdToDelete = scanner.nextInt();
-                    scanner.nextLine(); // clear newline
+                    scanner.nextLine();
 
                     workoutService.deleteWorkoutClass(classIdToDelete);
+                    break;
 
-                    break;
                 case 4:
-                    workoutService.getWorkoutClassesByTrainer(user.getId());
+                    List<WorkoutClass> trainerClasses = workoutService.getWorkoutClassesByTrainer(user.getId());
+                    if (trainerClasses.isEmpty()) {
+                        System.out.println("You have no workout classes scheduled.");
+                    } else {
+                        System.out.println("\nYour Workout Classes:");
+                        for (WorkoutClass wc : trainerClasses) {
+                            System.out
+                                    .println("ID: " + wc.getWorkoutClassId() + " | Type: " + wc.getWorkoutClassType());
+                        }
+                    }
                     break;
+
                 case 5:
                     System.out.println("Logging out...");
                     break;
+
                 default:
                     System.out.println("Invalid choice.");
             }

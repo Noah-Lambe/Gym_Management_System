@@ -239,9 +239,6 @@ public class GymApp {
                     newMembership.setCost(cost);
                     newMembership.setMemberId(user.getId());
 
-                    System.out.println("DEBUG: User ID from logged-in user: " + user.getId());
-                    System.out.println("DEBUG: Member ID set on newMembership: " + newMembership.getMemberId());
-
                     membershipService.purchaseMembership(newMembership);
 
                     break;

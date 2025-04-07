@@ -233,15 +233,23 @@ public class GymApp {
                     break;
                 case 3:
                     Membership newMembership = new Membership();
+
+                    System.out.print("Enter membership type (e.g. Monthly, Yearly, Gold): ");
+                    String type = scanner.nextLine();
+                    newMembership.setMembershipType(type);
+
+                    System.out.print("Enter membership description: ");
+                    String description = scanner.nextLine();
+                    newMembership.setDescription(description);
+
                     System.out.print("Enter membership cost: ");
                     double cost = scanner.nextDouble();
                     scanner.nextLine();
+
                     newMembership.setCost(cost);
                     newMembership.setMemberId(user.getId());
 
                     membershipService.purchaseMembership(newMembership);
-
-                    break;
                 case 4:
                     System.out.println("Logging out...");
                     break;

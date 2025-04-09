@@ -1,4 +1,4 @@
-# Class Diagram and Relationship Between Entities
+## Class Diagram and Relationship Between Entities
 
 ``` plaintext
                         +-----------------+

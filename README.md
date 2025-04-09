@@ -121,5 +121,5 @@ The `DatabaseConnection` class is responsible for establishing a connection to t
 
 ## Project Structure and Class Diagram
 
-For a detailed class diagram and the project directory structure, please check out the `structure.md` file.
+For a detailed class diagram and the project directory structure, please check out the [Project Structure and Class Diagram](./structure.md) file.
 

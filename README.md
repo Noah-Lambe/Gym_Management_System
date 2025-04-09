@@ -83,6 +83,8 @@ DatabaseConnection:
 
 Responsible for establishing a connection to the database and initializing the necessary database configurations.
 
+
+
 ## Project Structure and Class Diagram
 
 For a detailed class diagram and the project directory structure, check out [structure.md](docs/structure.md).

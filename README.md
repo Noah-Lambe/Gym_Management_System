@@ -94,4 +94,4 @@ Ensure the DatabaseConnection class is properly configured to connect to the dat
 
 ## Project Structure and Class Diagram
 
-For a detailed class diagram and the project directory structure, check out [structure.md](docs/structure.md).
+For a detailed class diagram and the project directory structure, check out [structure.md](structure.md).

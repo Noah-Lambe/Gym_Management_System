@@ -1,97 +1,125 @@
 # Gym Management System
 ------------------------------------
+
 ## Application Overview
 
-This application is a tool to allow a gym to manage it's customers, staff, and offered services. It offers different functionality
-depending on the users role. 
+This application is a tool designed to help gyms manage their customers, staff, and offered services. The functionality varies depending on the user's role.
 
-- Admin Role: Admins can view all users, delete users, view memberships, and see total revenue.
+### User Roles:
 
-- Trainer Role: Trainers can manage their workout classes (add, update, delete) and view their scheduled classes.
+- **Admin Role**: Admins can:
+  - View all users.
+  - Delete users.
+  - View memberships.
+  - See total revenue.
 
-- Member Role: Members can browse workout classes, view their membership expenses, and purchase new memberships.
+- **Trainer Role**: Trainers can:
+  - Manage workout classes (add, update, delete).
+  - View their scheduled classes.
 
-### Instructions on How to Start and Use the System
+- **Member Role**: Members can:
+  - Browse workout classes.
+  - View their membership expenses.
+  - Purchase new memberships.
 
-Installation:
+## Instructions on How to Start and Use the System
 
-Download the project or clone it from GitHub.
+### Installation
 
-Ensure Java 8 or higher is installed.
+1. Download or clone the project from GitHub.
+2. Ensure that **Java 8** or higher is installed on your system.
+3. Set up a database (MySQL or another RDBMS).
+   
+### Running the Program
 
-Set up a database (MySQL or another RDBMS).
+1. Navigate to the `GymApp` directory in the terminal.
+2. Compile and run the application using the following commands:
 
-Running the Program:
+    ```bash
+    javac -d bin src/org/keyin/GymApp.java
+    java org.keyin.GymApp
+    ```
 
-Navigate to the GymApp directory in the terminal.
+### Using the System
 
-Compile and run as follows:
+After logging in as either an **Admin**, **Trainer**, or **Member**, you will be presented with a specific menu based on your role:
 
-bash
-Copy
-javac -d bin src/org/keyin/GymApp.java
-java org.keyin.GymApp
-Using the System:
+- **Admin**: View, delete users, and see total revenue.
+- **Trainer**: Manage workout classes (create, update, delete, view).
+- **Member**: Browse classes, view expenses, and purchase memberships.
 
-After logging in as either an Admin, Trainer, or Member, you will be presented with a specific menu depending on your role.
+## Breakdown of Classes and Their Interactions
 
-Admin: View, delete users, and view total revenue.
+### User Class (Main Class)
 
-Trainer: Manage workout classes (create, update, delete, view).
+The `User` class serves as the base class for all user types, containing general user information such as:
+- Username
+- Password
+- Email
+- Phone number
+- Role
 
-Member: Browse classes, view expenses, and purchase memberships.
+### Child Classes:
+1. **Admin**: 
+   - Inherits from `User` and adds functionality for managing users and viewing revenue.
+2. **Trainer**: 
+   - Inherits from `User` and adds functionality for managing workout classes.
+3. **Member**: 
+   - Inherits from `User` and adds functionality for managing memberships.
 
-### Breakdown of Classes and Their Interactions
+### Supporting Classes:
 
-User Class (Main Class):
+- **UserDAO**: 
+   - Handles database operations related to users (CRUD operations).
+  
+- **UserService**: 
+   - Provides higher-level functionality for interacting with users, ensuring business logic is followed, and managing the relationship between `User` and `UserDAO`.
 
-The User class is the base class for all user types, holding general user information such as username, password, email, phone number, and role.
+---
 
-Child Classes:
+### Membership Folder:
 
-Admin: Inherits from User and includes functionality for managing users and viewing revenue.
+- **Membership**: 
+   - Represents a gym membership with attributes like type, description, and cost.
 
-Trainer: Inherits from User and includes functionality for managing workout classes.
+- **MembershipDAO**: 
+   - Handles database CRUD operations related to memberships.
 
-Member: Inherits from User and includes functionality related to memberships.
+- **MembershipService**: 
+   - Provides business logic for managing memberships, including purchasing memberships and viewing expenses.
 
-UserDAO:
+---
 
-Handles database operations related to users (CRUD operations).
+### WorkoutClass Folder:
 
-UserService:
+- **WorkoutClass**: 
+   - Represents a workout class, including details like type, description, and trainer ID.
 
-Provides higher-level functionality for interacting with users, ensuring business logic is followed and managing the relationship between User and UserDAO.
+- **WorkoutClassDAO**: 
+   - Handles database CRUD operations related to workout classes.
 
-Membership Folder:
+- **WorkoutClassService**: 
+   - Provides higher-level services for managing workout classes.
 
-Membership: Represents a gym membership, with attributes like membership type, description, and cost.
+---
 
-MembershipDAO: Handles database operations related to memberships, such as CRUD operations.
+### DatabaseConnection Class
 
-MembershipService: Provides business logic for managing memberships, including purchasing memberships and viewing expenses.
+The `DatabaseConnection` class is responsible for establishing a connection to the database and initializing the necessary database configurations.
 
-WorkoutClass Folder:
+## Setting Up the Database for Development:
 
-WorkoutClass: Represents a workout class, including details like type, description, and trainer ID.
+### Create Database:
 
-WorkoutClassDAO: Handles database CRUD operations related to workout classes.
+1. Run the `scripts.sql` file to set up the schema for users, workout classes, and memberships.
 
-WorkoutClassService: Provides higher-level services to manage workout classes.
+### Database Connection Configuration:
 
-DatabaseConnection:
+1. Ensure the `DatabaseConnection` class is properly configured to connect to the database.
 
-Responsible for establishing a connection to the database and initializing the necessary database configurations.
-
-Setting Up the Database for Development:
-Create Database:
-
-Run the scripts.sql file to set up the schema for users, workout classes, and memberships.
-
-Database Connection Configuration:
-
-Ensure the DatabaseConnection class is properly configured to connect to the database.
+---
 
 ## Project Structure and Class Diagram
 
-For a detailed class diagram and the project directory structure, check out [structure.md](structure.md).
+For a detailed class diagram and the project directory structure, please check out the `structure.md` file.
+

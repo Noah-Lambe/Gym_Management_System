@@ -1,5 +1,6 @@
 # Class Diagram and Relationship Between Entities
 
+``` plaintext
                         +-----------------+
                         |      User       |
                         +-----------------+
@@ -71,9 +72,11 @@
                        | - purchaseMembership()|
                        | - viewExpenses()     |
                        +---------------------+
+```
 
 ## Project Directory Structure
 
+``` plaintext
 /src
     /main
         /java
@@ -97,15 +100,16 @@
                     WorkoutClassService.java <-- Service layer for workout classes
                 /database
                     DatabaseConnection.java  <-- Initializes DB connection
+```
 
 ## Build Process and Dependencies Used:
 
-Build Process:
+### Build Process:
 
-Use javac for manual compilation or use Maven/Gradle if preferred.
+- Use javac for manual compilation or use Maven/Gradle if preferred.
 
-Dependencies:
+### Dependencies:
 
-JDBC for database interaction.
+- JDBC for database interaction.
 
-MySQL or any other RDBMS for storing data.
+- PostgreSQL.

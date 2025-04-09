@@ -83,7 +83,14 @@ DatabaseConnection:
 
 Responsible for establishing a connection to the database and initializing the necessary database configurations.
 
+Setting Up the Database for Development:
+Create Database:
 
+Run the scripts.sql file to set up the schema for users, workout classes, and memberships.
+
+Database Connection Configuration:
+
+Ensure the DatabaseConnection class is properly configured to connect to the database.
 
 ## Project Structure and Class Diagram
 

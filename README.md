@@ -117,9 +117,18 @@ The `DatabaseConnection` class is responsible for establishing a connection to t
 
 1. Ensure the `DatabaseConnection` class is properly configured to connect to the database.
 
+2. Update Your Database Credentials:
+
+   - Open the DatabaseConnection.java file.
+
+   - Locate the database connection URL, username, and password.
+
+   - Replace the default PostgreSQL password with your own.
+
+3. Save the file and restart the application to apply the changes.
+
 ---
 
 ## Project Structure and Class Diagram
 
 For a detailed class diagram and the project directory structure, please check out the [Project Structure and Class Diagram](./structure.md) file.
-

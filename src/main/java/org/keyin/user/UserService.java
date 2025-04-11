@@ -2,6 +2,7 @@ package org.keyin.user;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -31,17 +32,45 @@ public class UserService {
     }
 
     public void deleteUser(String username) throws SQLException {
-        String sql = "DELETE FROM users WHERE user_name = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, username);
-            int rowsAffected = pstmt.executeUpdate();
+        String getUserIdSQL = "SELECT user_id FROM users WHERE user_name = ?";
+        String deleteMembershipsSQL = "DELETE FROM memberships WHERE member_id = ?";
+        String deleteUserSQL = "DELETE FROM users WHERE user_name = ?";
 
-            if (rowsAffected > 0) {
-                System.out.println("User '" + username + "' deleted successfully.");
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement getUserIdStmt = conn.prepareStatement(getUserIdSQL);
+                PreparedStatement deleteMembershipsStmt = conn.prepareStatement(deleteMembershipsSQL);
+                PreparedStatement deleteUserStmt = conn.prepareStatement(deleteUserSQL)) {
+
+            conn.setAutoCommit(false);
+
+            // Gets the user_id from username
+            getUserIdStmt.setString(1, username);
+            ResultSet rs = getUserIdStmt.executeQuery();
+
+            if (rs.next()) {
+                int userId = rs.getInt("user_id");
+
+                // Deletes memberships tied to this user
+                deleteMembershipsStmt.setInt(1, userId);
+                deleteMembershipsStmt.executeUpdate();
+
+                // Deletes the user
+                deleteUserStmt.setString(1, username);
+                int rowsAffected = deleteUserStmt.executeUpdate();
+
+                conn.commit();
+
+                if (rowsAffected > 0) {
+                    System.out.println("User '" + username + "' deleted successfully.");
+                } else {
+                    System.out.println("No user found with username: " + username);
+                }
             } else {
                 System.out.println("No user found with username: " + username);
             }
+        } catch (SQLException e) {
+            System.out.println("Error deleting user: " + e.getMessage());
+            throw e;
         }
     }
 

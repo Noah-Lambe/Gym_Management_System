@@ -121,24 +121,23 @@ public class GymApp {
                     String usernameToDelete = scanner.nextLine();
                     try {
                         userService.deleteUser(usernameToDelete);
-                        System.out.println("User deleted successfully.");
                     } catch (SQLException e) {
                         System.out.println("Error deleting user: " + e.getMessage());
                     }
                     break;
-
                 case 3:
                     membershipService.getAllMemberships().forEach(System.out::println);
                     break;
                 case 4:
                     System.out.printf("Total Revenue: %.2f%n", membershipService.getTotalRevenue());
+                    break;
                 case 5:
                     System.out.println("Logging out...");
                     break;
                 default:
                     System.out.println("Invalid choice.");
             }
-        } while (choice != 4);
+        } while (choice != 5);
     }
 
     private static void showTrainerMenu(Scanner scanner, User user, UserService userService,
@@ -250,7 +249,16 @@ public class GymApp {
 
             switch (choice) {
                 case 1:
-                    workoutService.getAllWorkoutClasses();
+                    List<WorkoutClass> classes = workoutService.getAllWorkoutClasses();
+                    if (classes.isEmpty()) {
+                        System.out.println("No workout classes available.");
+                    } else {
+                        for (WorkoutClass wc : classes) {
+                            System.out.println("ID: " + wc.getWorkoutClassId() +
+                                    " | Type: " + wc.getWorkoutClassType() +
+                                    " | Description: " + wc.getWorkoutClassDescription());
+                        }
+                    }
                     break;
                 case 2:
                     membershipService.viewMembershipExpenses(user.getId());

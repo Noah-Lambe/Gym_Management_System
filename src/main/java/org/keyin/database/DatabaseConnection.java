@@ -8,6 +8,7 @@ import java.sql.*;
 public class DatabaseConnection {
     private static final String URL = "jdbc:postgresql://localhost:5432/gym_management";
     private static final String USER = "postgres";
+    // Must use own postgres password below
     private static final String PASSWORD = "6624";
 
     public static Connection getConnection() throws SQLException {

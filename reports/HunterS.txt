@@ -1,0 +1,33 @@
+Individual Report – Gym Management System
+Name: Hunter
+Project: Gym Management System (Console App – Java + PostgreSQL)
+Role: Frontend Developer (Console UI / Logic)
+My Contributions
+During the development of the Gym Management System, my primary responsibility was building and managing the user interface and user interaction flow of the application. This was done entirely in Java, using Scanner to interact with users via the console. Here's a breakdown of my contributions:
+• Developed the main menu system in GymApp.java for:
+o Registering new users
+o Logging in
+o Navigating role-based menus
+• Created role-based UI flows for:
+o Admin: Manage users, view total revenue
+o Trainer: Add/update/delete/view workout classes
+o Member: Browse classes, purchase memberships, view expenses
+• Connected the UI to backend logic by integrating with:
+o UserService and UserDao
+o MembershipService and MembershipDAO
+o WorkoutClassService and WorkoutClassDAO
+• Implemented clean and user-friendly input validation using Java’s Scanner and while loops
+• Assisted with testing user login, user role access, and example menu actions
+GitHub / Branches
+• Worked off the main project repository in VS Code
+• Contributed through:
+o Edits to GymApp.java
+• Collaborated with the backend teammate by plugging in their DAO methods and verifying database inputs and outputs
+
+Challenges Faced
+
+1. Team Coordination
+   Working on the user interface side meant waiting for DAO and DB setup to be finalized.
+   Solution: Built everything with placeholder logic first so that it was easy to plug in the real database methods once ready.
+2. Putting everything together, making sure there are no difference when my teammates use the code verse when I do and making sure we used the same naming for objects and making sure all the connections are right for the database
+3. Ran into a problem when I first gave my code to my team when he tested it the UI was asking for two inputs on one line so I had to fix that. Just annoying things like that where most problems come from.

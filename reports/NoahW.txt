@@ -1,0 +1,9 @@
+Noah Whiffen - SD12
+Report for Java Final Sprint
+
+My task for this assignment was the handle the database integration. I created the PostgreSQL database and all required queries.
+I also wrote all the documentation, not including everyone else's individual reports. We worked on most debugging as a team and 
+deployed all our code to individual branches which were merged at the end.
+
+I didn't face any challenges with the database integration, but along the way we faced a lot of bugs which we worked on as a team.
+Too many to mention and most fairly minor, but we managed to figure it out.

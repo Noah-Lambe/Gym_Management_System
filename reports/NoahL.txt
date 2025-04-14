@@ -1,0 +1,12 @@
+Noah Lambe - SD12
+Advanced Programming with Java
+Final Sprint – Winter 2025
+12 April 2025
+
+For this project, I was responsible for implementing the Membership and Workout Class Management systems. I developed and connected classes such as Membership, MembershipDAO, and MembershipService, enabling Members and Trainers to purchase memberships. Admins could view total revenue generated. For workout classes, I created corresponding DAO and Service classes to allow Trainers to add, update, and delete classes, while Members could browse available sessions. These features were integrated into a role-specific CLI menu for a smooth user experience.
+
+Beyond feature development, I focused on backend reliability. I fixed merge-related naming issues, updated constructors for compatibility, and improved SQL queries. I also addressed a foreign key constraint by passing trainer IDs correctly from the user session. User-friendly messages were added for empty states, and I ensured that deleting users with memberships didn’t cause errors.
+
+Challenges included resolving merge conflicts, fixing logic errors across service layers, and managing PostgreSQL integration. I spent time aligning SQL queries with schema changes and testing edge cases, particularly in admin functions like user deletion and revenue tracking.
+
+To manage collaboration, I used GitHub effectively—working with feature branches, frequent commits, and clear pull requests to maintain team transparency and reduce conflicts.

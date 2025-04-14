@@ -1,0 +1,11 @@
+Jonathan Strickland - SD12
+Report for Java Final Sprint
+
+My Task for this assignment was the User Registration and Authentication, I update User class that is parent class for Admin, Member and Trainer 
+and represents common attributes for all these class, I updated UserDAO that is responsible for interacting with the database. I also updated UserService
+that is responsible for the business to manage users.
+
+Admin, Member and Trainer inherit attributes from users and also have attributes unique to them.
+
+Overall I didn't face any challenge with the User Registration and Authentication, but me and my team faced some minor bugs in the testing process that we all
+handled as a team.

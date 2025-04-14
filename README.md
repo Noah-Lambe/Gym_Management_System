@@ -7,17 +7,17 @@ This application is a tool designed to help gyms manage their customers, staff, 
 
 ### User Roles:
 
-- **Admin Role**: Admins can:
+- **Admin Role**:
   - View all users.
   - Delete users.
   - View memberships.
   - See total revenue.
 
-- **Trainer Role**: Trainers can:
+- **Trainer Role**:
   - Manage workout classes (add, update, delete).
   - View their scheduled classes.
 
-- **Member Role**: Members can:
+- **Member Role**:
   - Browse workout classes.
   - View their membership expenses.
   - Purchase new memberships.

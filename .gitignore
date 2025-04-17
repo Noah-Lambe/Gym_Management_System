@@ -38,3 +38,5 @@ build/
 .DS_Storereports/JavaVideoReport.mp4.zip
 reports/JavaVideoReport.mp4.zip
 reports/JavaVideoReport.mp4.zip
+
+.idea/
